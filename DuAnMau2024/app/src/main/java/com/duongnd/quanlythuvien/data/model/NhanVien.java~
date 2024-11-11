@@ -1,0 +1,28 @@
+package com.duongnd.quanlythuvien.data.model;
+
+public class NhanVien {
+    private int maNV;
+    private String hoTen;
+    private String tenDangNhap;
+    private int role;
+    private String matKhau;
+
+    public NhanVien() {
+    }
+
+    public NhanVien(int maNV, String hoTen, String tenDangNhap, int role, String matKhau) {
+        this.maNV = maNV;
+        this.hoTen = hoTen;
+        this.tenDangNhap = tenDangNhap;
+        this.role = role;
+        this.matKhau = matKhau;
+    }
+
+    public int getMaNV() {
+        return maNV;
+    }
+
+    public void setMaNV(int maNV) {
+        this.maNV = maNV;
+    }
+}
