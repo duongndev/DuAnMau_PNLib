@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_title_layout_them_sach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Them Sach"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/txt_loai_sach_layout_them_sach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="15dp"
+        android:text="Loai sach"
+        android:textColor="@color/black" />
+
+    <Spinner
+        android:id="@+id/spin_loai_sach_layout_them_sach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp" />
+
+    <EditText
+        android:id="@+id/edt_ten_sach_layout_them_sach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:drawablePadding="12dp"
+        android:hint="Ten sach"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edt_gia_sach_layout_them_sach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:drawablePadding="12dp"
+        android:hint="Gia sach"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/edt_tac_gia_sach_layout_them_sach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Tac gia"
+        android:drawablePadding="12dp"
+        android:inputType="textPersonName" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
