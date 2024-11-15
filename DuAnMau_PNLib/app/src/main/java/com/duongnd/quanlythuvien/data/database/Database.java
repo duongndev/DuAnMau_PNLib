@@ -10,6 +10,7 @@ public class Database extends SQLiteOpenHelper {
 
     static final String DB_NAME = "PNLib.db";
     static final int DB_VERSION = 1;
+
     public Database(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -17,64 +18,55 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String TB_NhanVien = "CREATE TABLE NhanVien (" +
-                "maNV INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "hoTen TEXT NOT NULL, " +
-                "tenDangNhap TEXT NOT NULL, " +
-                "role INTEGER NOT NULL, " +
-                "matKhau TEXT NOT NULL)";
-        db.execSQL(TB_NhanVien);
-        // 1 - thu thu, 2 - nhan vien
-        String insertNV = "insert into NhanVien values ('0', 'Thu Thu', 'thuthu', '1', 'thuthu'), ('1', 'Nhan Vien', 'nhanvien', '2', 'nhanvien')";
-        db.execSQL(insertNV);
 
-        String TB_thanhVien = "CREATE TABLE ThanhVien (" +
-                "maTV INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "hoTen TEXT NOT NULL, " +
-                "namSinh TEXT NOT NULL)";
-        db.execSQL(TB_thanhVien);
-        String insertTV = "insert into ThanhVien values (0,'thanh vien 1', '1999-01-01'), (1, 'thanh vien 2', '1999-01-01'), (2, 'thanh vien 3', '1999-01-01'), (3, 'thanh vien 4', '1999-01-01')";
-        db.execSQL(insertTV);
+        // Tạo bảng thủ thư
+        String tb_ThuThu = "create table ThuThu(" +
+                "maTT integer primary key autoincrement," +
+                "hoTen text not null," +
+                "matKhau text not null)";
+        db.execSQL(tb_ThuThu);
 
-        String TB_loaiSach = "CREATE TABLE LoaiSach (" +
-                "maLoai INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "tenLoai TEXT NOT NULL, " +
-                "moTa TEXT NOT NULL)";
-        db.execSQL(TB_loaiSach);
-        String insertLS = "insert into LoaiSach values ('0', 'Loai Sach 1', 'loai sach 1'), ('1', 'Loai sach 2', 'Loai sach 2'), ('2', 'Loai sach 3', 'Loai sach 3'), ('3', 'Loai sach 4', 'Loai sach 4')";
-        db.execSQL(insertLS);
+        // Tạo bảng thành viên
+        String tb_ThanhVien = "create table ThanhVien(" +
+                "maTV integer primary key autoincrement," +
+                "hoTen text not null," +
+                "namSinh text not null)";
+        db.execSQL(tb_ThanhVien);
 
-        String TB_sach = "CREATE TABLE Sach (" +
-                "maSach INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "maLoai INTEGER NOT NULL, " +
-                "giaThue INTEGER NOT NULL, " +
-                "tenSach TEXT NOT NULL, " +
-                "tacGia TEXT NOT NULL)";
-        db.execSQL(TB_sach);
-        String insertSach = "insert into Sach values (0, 0, 10000, 'Sach1', 'khong biet'), (1, 1, 20000, 'Sach2', 'khong biet'), (2, 2, 30000, 'Sach3', 'khong biet'), (3, 3, 40000, 'Sach4', 'khong biet')";
-        db.execSQL(insertSach);
+        // Tạo bảng loại sách
+        String tb_LoaiSach = "create table LoaiSach(" +
+                "maLoai integer primary key autoincrement," +
+                "tenLoai text not null)";
+        db.execSQL(tb_LoaiSach);
 
+        // Tạo bảng sách
+        String tb_Sach = "create table Sach(" +
+                "maSach integer primary key autoincrement," +
+                "tenSach text not null," +
+                "giaThue integer not null," +
+                "maLoai integer references LoaiSach(maLoai)," +
+                "namXuatBan integer not null)";
+        db.execSQL(tb_Sach);
 
-        String TB_phieuMuon = "CREATE TABLE PhieuMuon (" +
-                "maPM INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "maTV INTEGER REFERENCES ThanhVien(maTV), " +
-                "maSach INTEGER REFERENCES Sach(maSach), " +
-                "tienThue INTEGER NOT NULL, " +
-                "ngayMuon DATE NOT NULL, " +
-                "ngayTra DATE NOT NULL, " +
-                "trangThai INTEGER NOT NULL)"; // 0 - chua tra, 1 - da tra
-        db.execSQL(TB_phieuMuon);
-
-        String insertPM = "INSERT INTO PhieuMuon values (0, 0, 0, 10000, '2020-01-01', '2020-01-01', 0), (1, 1, 1, 20000, '2020-01-01', '2020-01-01', 1), (2, 2, 2, 30000, '2020-01-01', '2020-01-01', 0), (3, 3, 3, 40000, '2020-01-01', '2020-01-01',1), (4, 3, 4, 50000, '2020-01-01', '2020-01-01', 0)";
-        db.execSQL(insertPM);
-
-        String TB_phieuMuonCT = "CREATE TABLE PhieuMuonCT (" +
-                "maPM INTEGER REFERENCES PhieuMuon(maPM), " +
-                "maSach INTEGER REFERENCES Sach(maSach), " +
-                "soLuong INTEGER NOT NULL)";
-        db.execSQL(TB_phieuMuonCT);
+        // Tạo bảng phiếu mượn
+        String tb_PhieuMuon = "create table PhieuMuon(" +
+                "maPM integer primary key autoincrement," +
+                "maTT integer references ThuThu(maTT)," +
+                "maTV integer references ThanhVien(maTV)," +
+                "maSach integer references Sach(maSach)," +
+                "tienThue integer not null," +
+                "traSach integer not null," +  //trả sách: 1: đã trả - 0: chưa trả
+                "ngayMuon text not null, " +
+                "ngayTra text not null) ";
+        db.execSQL(tb_PhieuMuon);
 
 
+        //data mẫu
+        db.execSQL("INSERT INTO LoaiSach VALUES (1, 'Lập trình'),(2,'Thiết kế web'),(3, 'Maketing')");
+        db.execSQL("INSERT INTO Sach VALUES (1, 'Lập Trình Android', 2500, 1,2004), (2, 'Lập trình cơ bản', 1000, 1,2005), (3, 'Thiết kế web', 2000, 3,2006)");
+        db.execSQL("INSERT INTO ThuThu VALUES (1,'thuthu01','12346'),(2,'thuthu02','123456')");
+        db.execSQL("INSERT INTO ThanhVien VALUES (1,'Thanh vien 01','2000'),(2,'Thanh vien 02','2000')");
+        db.execSQL("INSERT INTO PhieuMuon VALUES (1, 1, 1, 1, 2500, 1, '19/03/2022', '19/04/2022'),(2,2,1, 3, 2000, 0, '19/03/2022', '19/04/2022'), (3,1,2, 1, 2000, 1, '19/03/2022', '19/04/2022')");
     }
 
     @Override

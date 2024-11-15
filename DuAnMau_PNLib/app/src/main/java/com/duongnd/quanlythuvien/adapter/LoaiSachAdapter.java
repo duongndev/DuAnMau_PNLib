@@ -115,23 +115,19 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.LoaiSa
         builder.setView(view);
         TextView tv_title_dialog_loai_sach = (TextView) view.findViewById(R.id.tv_title_dialog_loai_sach);
         EditText edt_ten_loai_sach = (EditText) view.findViewById(R.id.edt_dialog_ten_loai_sach);
-        EditText edt_mo_ta = (EditText) view.findViewById(R.id.edt_dialog_mo_ta_loai_sach);
         tv_title_dialog_loai_sach.setText("Sua loai sach");
         edt_ten_loai_sach.setText(loaiSach.getTenLoai());
-        edt_mo_ta.setText(loaiSach.getMoTa());
         builder.setCancelable(true);
         builder.setPositiveButton("Sua", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String tenLoai = edt_ten_loai_sach.getText().toString().trim();
-                String moTa = edt_mo_ta.getText().toString().trim();
 
-                if (tenLoai.isEmpty() || moTa.isEmpty()) {
+                if (tenLoai.isEmpty()) {
                     Toast.makeText(context, "Vui long nhap day du thong tin", Toast.LENGTH_SHORT).show();
                 } else {
                     loaiSachDAO = new LoaiSachDAO(context);
                     loaiSach.setTenLoai(tenLoai);
-                    loaiSach.setMoTa(moTa);
                     long result = loaiSachDAO.suaLoaiSach(loaiSach);
                     if (result > 0) {
                         listLoaiSach.clear();
@@ -156,7 +152,7 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.LoaiSa
     }
 
     public static class LoaiSachViewHolder extends RecyclerView.ViewHolder {
-        TextView txt_ma_loai_sach, txt_ten_loai_sach, txt_nha_xuat_ban;
+        TextView txt_ma_loai_sach, txt_ten_loai_sach;
         ImageView img_delete_loai_sach, img_update_loai_sach;
 
         public LoaiSachViewHolder(@NonNull View itemView) {

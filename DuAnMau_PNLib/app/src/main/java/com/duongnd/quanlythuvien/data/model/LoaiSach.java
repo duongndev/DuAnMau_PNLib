@@ -2,16 +2,14 @@ package com.duongnd.quanlythuvien.data.model;
 
 public class LoaiSach {
     private int maLoai;
-    private String tenLoai, moTa;
+    private String tenLoai;
 
     public LoaiSach() {
     }
 
-
-    public LoaiSach(int maLoai, String tenLoai, String moTa) {
+    public LoaiSach(int maLoai, String tenLoai) {
         this.maLoai = maLoai;
         this.tenLoai = tenLoai;
-        this.moTa = moTa;
     }
 
     public int getMaLoai() {
@@ -30,20 +28,11 @@ public class LoaiSach {
         this.tenLoai = tenLoai;
     }
 
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
-
     @Override
     public String toString() {
         return "LoaiSach{" +
                 "maLoai=" + maLoai +
                 ", tenLoai='" + tenLoai + '\'' +
-                ", moTa='" + moTa + '\'' +
                 '}';
     }
 }

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextView
@@ -14,30 +15,23 @@
         android:textStyle="bold"
         android:layout_gravity="center"/>
 
-    <EditText
-        android:id="@+id/edt_dialog_ten_loai_sach"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:drawablePadding="12dp"
-        android:hint="Ten Sach"
-        android:inputType="textPersonName"
-        android:importantForAutofill="no" />
 
-    <EditText
-        android:id="@+id/edt_dialog_mo_ta_loai_sach"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:drawablePadding="12dp"
-        android:hint="Mo ta"
-        android:inputType="textPersonName"
-        android:importantForAutofill="no" />
+        app:hintEnabled="false">
+        <EditText
+            android:id="@+id/edt_dialog_ten_loai_sach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ten loai Sach"
+            android:inputType="textPersonName"
+            android:importantForAutofill="no" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 
 </LinearLayout>

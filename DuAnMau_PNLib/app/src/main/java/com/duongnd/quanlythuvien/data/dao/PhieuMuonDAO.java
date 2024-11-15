@@ -23,12 +23,13 @@ public class PhieuMuonDAO {
 
     public int themPhieuMuon(PhieuMuon phieuMuon) {
         ContentValues values = new ContentValues();
+        values.put("maTT", phieuMuon.getMaTT());
         values.put("maTV", phieuMuon.getMaTV());
         values.put("maSach", phieuMuon.getMaSach());
         values.put("tienThue", phieuMuon.getTienThue());
         values.put("ngayMuon", phieuMuon.getNgayMuon());
         values.put("ngayTra", phieuMuon.getNgayTra());
-        values.put("trangThai", phieuMuon.getTrangThai());
+        values.put("traSach", phieuMuon.getTraSach());
         long result = sqLiteDatabase.insert("PhieuMuon", null, values);
         if (result != 0) {
             return 1;
@@ -40,11 +41,13 @@ public class PhieuMuonDAO {
 
     public int suaPhieuMuon(PhieuMuon phieuMuon) {
         ContentValues values = new ContentValues();
+        values.put("maTT", phieuMuon.getMaTT());
         values.put("maTV", phieuMuon.getMaTV());
         values.put("maSach", phieuMuon.getMaSach());
         values.put("tienThue", phieuMuon.getTienThue());
-        values.put("ngayMuon", String.valueOf(phieuMuon.getNgayMuon()));
-        values.put("ngayTra", String.valueOf(phieuMuon.getNgayTra()));
+        values.put("ngayMuon", phieuMuon.getNgayMuon());
+        values.put("ngayTra", phieuMuon.getNgayTra());
+        values.put("traSach", phieuMuon.getTraSach());
         long result = sqLiteDatabase.update("PhieuMuon", values, "maPM=?", new String[]{String.valueOf(phieuMuon.getMaPM())});
         if (result != 0) {
             return 1;
@@ -64,7 +67,7 @@ public class PhieuMuonDAO {
 
     public boolean thayDoiTrangThai(int maPM) {
         ContentValues values = new ContentValues();
-        values.put("trangThai", 1);
+        values.put("traSach", 1);
         long result = sqLiteDatabase.update("PhieuMuon", values, "maPM=?", new String[]{String.valueOf(maPM)});
         if (result != 0) {
             return true;
@@ -72,8 +75,6 @@ public class PhieuMuonDAO {
             return false;
         }
     }
-
-
 
 
     @SuppressLint("Range")
@@ -84,12 +85,13 @@ public class PhieuMuonDAO {
         while (cursor.moveToNext()) {
             PhieuMuon phieuMuon = new PhieuMuon();
             phieuMuon.setMaPM(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maPM"))));
+            phieuMuon.setMaTT(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maTT"))));
             phieuMuon.setMaTV(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maTV"))));
             phieuMuon.setMaSach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maSach"))));
             phieuMuon.setTienThue(Integer.parseInt(cursor.getString(cursor.getColumnIndex("tienThue"))));
             phieuMuon.setNgayMuon(cursor.getString(cursor.getColumnIndex("ngayMuon")));
             phieuMuon.setNgayTra(cursor.getString(cursor.getColumnIndex("ngayTra")));
-            phieuMuon.setTrangThai(Integer.parseInt(cursor.getString(cursor.getColumnIndex("trangThai"))));
+            phieuMuon.setTraSach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("traSach"))));
             phieuMuons.add(phieuMuon);
         }
         return phieuMuons;

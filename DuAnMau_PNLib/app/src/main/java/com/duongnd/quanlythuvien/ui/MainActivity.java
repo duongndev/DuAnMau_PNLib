@@ -11,10 +11,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -23,7 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.duongnd.quanlythuvien.R;
 import com.duongnd.quanlythuvien.ui.phieumuon.PhieuMuonFragment;
 import com.duongnd.quanlythuvien.ui.sach.SachFragment;
-import com.duongnd.quanlythuvien.ui.theloai.TheLoaiFragment;
+import com.duongnd.quanlythuvien.ui.theloai.LoaiSachFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        role = getIntent().getIntExtra("role", 1);
+//        role = getIntent().getIntExtra("role", 1);
 
 
         initViews();
         if (savedInstanceState == null) {
-            replaceFragment(new PhieuMuonFragment());
+            replaceFragment(new LoaiSachFragment());
         }
 
 
@@ -59,15 +56,15 @@ public class MainActivity extends AppCompatActivity {
         Menu menu = navigationView.getMenu();
         MenuItem taoNhanVien = menu.findItem(R.id.nav_tao_nhan_vien);
 
-        taoNhanVien.setVisible(role == 1);
-        tvRole.setText("Chuc vu: " + (role == 1 ? "Thu Thu" : "Nhan Vien"));
+//        taoNhanVien.setVisible(role == 1);
+//        tvRole.setText("Chuc vu: " + (role == 1 ? "Thu Thu" : "Nhan Vien"));
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_quan_ly_sach) {
                 replaceFragment(new SachFragment());
             } else if (id == R.id.nav_quan_ly_the_loai) {
-                replaceFragment(new TheLoaiFragment());
+                replaceFragment(new LoaiSachFragment());
             } else if (id == R.id.nav_quan_ly_thanh_vien) {
                 Toast.makeText(MainActivity.this, "Quan Ly Thanh Vien", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_quan_ly_phieu_muon) {

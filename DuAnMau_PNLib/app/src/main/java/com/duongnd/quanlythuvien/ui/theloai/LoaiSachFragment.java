@@ -25,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TheLoaiFragment extends Fragment {
+public class LoaiSachFragment extends Fragment {
 
 
     RecyclerView recyclerView_loai_sach;
@@ -43,7 +43,6 @@ public class TheLoaiFragment extends Fragment {
         btn_add_loai_sach = view.findViewById(R.id.add_loai_sach);
         recyclerView_loai_sach.setHasFixedSize(true);
 
-        //Chèn một kẻ ngang giữa các phần tử
         DividerItemDecoration dividerHorizontal = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
         recyclerView_loai_sach.addItemDecoration(dividerHorizontal);
 
@@ -78,64 +77,19 @@ public class TheLoaiFragment extends Fragment {
         builder.setView(view);
         TextView tv_title_dialog_loai_sach = view.findViewById(R.id.tv_title_dialog_loai_sach);
         EditText edt_ten_loai_sach = view.findViewById(R.id.edt_dialog_ten_loai_sach);
-        EditText edt_mo_ta = view.findViewById(R.id.edt_dialog_mo_ta_loai_sach);
         builder.setCancelable(true);
         tv_title_dialog_loai_sach.setText("Them loai sach");
         builder.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String tenLoai = edt_ten_loai_sach.getText().toString();
-                String moTai = edt_mo_ta.getText().toString();
-                if (tenLoai.isEmpty() || moTai.isEmpty()) {
+                if (tenLoai.isEmpty()) {
                     Toast.makeText(getContext(), "Vui long nhap day du thong tin", Toast.LENGTH_SHORT).show();
-                    return;
                 } else {
                     LoaiSach loaiSach = new LoaiSach();
                     loaiSach.setTenLoai(tenLoai);
-                    loaiSach.setMoTa(moTai);
                     loaiSachDAO.themLoaiSach(loaiSach);
                     getAllLoaiSach();
-                }
-
-            }
-        });
-
-        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.create().show();
-    }
-
-    private void dialogSuaLoaiSach(LoaiSach loaiSach) {
-        LayoutInflater inflater = LayoutInflater.from(requireContext());
-        View view = inflater.inflate(R.layout.layout_loai_sach, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setView(view);
-        TextView tv_title_dialog_loai_sach = (TextView) view.findViewById(R.id.tv_title_dialog_loai_sach);
-        EditText edt_ten_loai_sach = (EditText) view.findViewById(R.id.edt_dialog_ten_loai_sach);
-        EditText edt_mo_ta = (EditText) view.findViewById(R.id.edt_dialog_mo_ta_loai_sach);
-        tv_title_dialog_loai_sach.setText("Sua loai sach");
-        edt_ten_loai_sach.setText(loaiSach.getTenLoai());
-        edt_mo_ta.setText(loaiSach.getMoTa());
-        builder.setCancelable(true);
-        builder.setPositiveButton("Sua", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String tenLoai = edt_ten_loai_sach.getText().toString();
-                String moTai = edt_mo_ta.getText().toString();
-                if (tenLoai.isEmpty() || moTai.isEmpty()) {
-                    Toast.makeText(getContext(), "Vui long nhap day du thong tin", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    loaiSach.setTenLoai(tenLoai);
-                    loaiSach.setMoTa(moTai);
-                    loaiSachDAO.suaLoaiSach(loaiSach);
-                    loaiSachAdapter.notifyDataSetChanged();
-                    getAllLoaiSach();
-                    Toast.makeText(getContext(), "Sua thanh cong", Toast.LENGTH_SHORT).show();
                 }
 
             }

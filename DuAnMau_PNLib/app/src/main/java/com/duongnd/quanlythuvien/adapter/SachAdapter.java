@@ -54,14 +54,14 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
     @Override
     public void onBindViewHolder(@NonNull SachAdapter.SachViewHolder holder, int position) {
         Sach sachs = listSach.get(position);
-        holder.txt_ma_sach.setText("Ma sach: " + sachs.getMaSach() + "");
-        holder.txt_ten_sach.setText("Ten sach: "+ sachs.getTenSach());
-        holder.txt_tac_gia.setText("Tac gia: " + sachs.getTacGia());
+        holder.txt_ma_sach.setText("Mã sách: " + sachs.getMaSach() + "");
+        holder.txt_ten_sach.setText("Tên sách: "+ sachs.getTenSach());
+        holder.txt_nam_xuat_ban.setText("Năm xuất bản: " + sachs.getNamXuatBan() + "");
 
         Locale locale = new Locale("vn", "VN");
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
         String tien = numberFormat.format(sachs.getGiaThue());
-        holder.txt_gia_sach.setText("Gia thue: " + tien);
+        holder.txt_gia_sach.setText("Giá thuê: " + tien);
 
         String tenLoai;
         try {
@@ -72,7 +72,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
             tenLoai = "Đã xóa loại sách";
         }
 
-        holder.txt_ten_loai_sach.setText(tenLoai);
+        holder.txt_ten_loai_sach.setText("Loại sách: " + tenLoai);
 
 
 
@@ -87,23 +87,23 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                        .setTitle("Xoa sach")
-                        .setMessage("Ban co muon xoa " + sachs.getTenSach() + " khong ?")
-                        .setPositiveButton("Co", (dialog, which) -> {
+                        .setTitle("Xóa sách")
+                        .setMessage("Bạn có muốn xóa " + sachs.getTenSach() + " không?")
+                        .setPositiveButton("Có", (dialog, which) -> {
                             sachDAO = new SachDAO(context);
-                            int result = sachDAO.xoaSach(sachs.getMaLoai());
+                            int result = sachDAO.xoaSach(sachs.getMaSach());
                             if (result > 0) {
                                 listSach.clear();
                                 listSach.addAll(sachDAO.getAllSach());
                                 notifyDataSetChanged();
                                 dialog.dismiss();
-                                Toast.makeText(context, "Xoa thanh cong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                             } else {
                                 dialog.dismiss();
-                                Toast.makeText(context, "Xoa khong thanh cong", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Xóa không thành công", Toast.LENGTH_SHORT).show();
                             }
                         })
-                        .setNegativeButton("Khong", (dialog, which) -> {
+                        .setNegativeButton("Hủy", (dialog, which) -> {
                             dialog.dismiss();
                         });
 
@@ -120,7 +120,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
         TextView txt_title = (TextView) view.findViewById(R.id.txt_title_layout_them_sach);
         EditText edt_ten_sach = (EditText) view.findViewById(R.id.edt_ten_sach_layout_them_sach);
         EditText edt_gia_sach = (EditText) view.findViewById(R.id.edt_gia_sach_layout_them_sach);
-        EditText edt_tac_gia = (EditText) view.findViewById(R.id.edt_tac_gia_sach_layout_them_sach);
+        EditText edt_nam_xuat_ban = (EditText) view.findViewById(R.id.edt_nam_xuat_ban_layout_them_sach);
         Spinner spinner_loai_sach = (Spinner) view.findViewById(R.id.spin_loai_sach_layout_them_sach);
 
         loaiSachsList = new ArrayList<>();
@@ -149,19 +149,19 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
             }
         }
         spinner_loai_sach.setSelection(mst);
-        txt_title.setText("Sua Sach");
+        txt_title.setText("Sửa sách");
         edt_ten_sach.setText(sach.getTenSach());
         edt_gia_sach.setText(Integer.toString(sach.getGiaThue()));
-        edt_tac_gia.setText(sach.getTacGia());
+        edt_nam_xuat_ban.setText(sach.getNamXuatBan());
         builder.setView(view);
 
 
-        builder.setPositiveButton("Sua", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 sach.setTenSach(edt_ten_sach.getText().toString());
                 sach.setGiaThue(Integer.parseInt(edt_gia_sach.getText().toString()));
-                sach.setTacGia(edt_tac_gia.getText().toString());
+                sach.setNamXuatBan(Integer.parseInt(edt_nam_xuat_ban.getText().toString()));
                 sach.setMaLoai(ms);
                 sachDAO = new SachDAO(context);
                 sachDAO.suaSach(sach);
@@ -169,11 +169,11 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
                 listSach.addAll(sachDAO.getAllSach());
                 notifyDataSetChanged();
                 dialog.dismiss();
-                Toast.makeText(context, "Sua thanh cong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
             }
         });
 
-        builder.setNegativeButton("Huy", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -193,7 +193,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
     }
 
     public static class SachViewHolder extends RecyclerView.ViewHolder {
-        TextView txt_ma_sach, txt_ten_sach, txt_tac_gia, txt_gia_sach, txt_ten_loai_sach;
+        TextView txt_ma_sach, txt_ten_sach, txt_nam_xuat_ban, txt_gia_sach, txt_ten_loai_sach;
         ImageView img_delete_sach, img_update_sach;
 
         public SachViewHolder(@NonNull View itemView) {
@@ -201,7 +201,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
             txt_ma_sach = itemView.findViewById(R.id.txt_ma_sach);
             txt_ten_sach = itemView.findViewById(R.id.txt_ten_sach);
             txt_gia_sach = itemView.findViewById(R.id.txt_gia_sach);
-            txt_tac_gia = itemView.findViewById(R.id.txt_tac_gia_sach);
+            txt_nam_xuat_ban = itemView.findViewById(R.id.txt_nam_xuat_ban);
             txt_ten_loai_sach = itemView.findViewById(R.id.txt_ten_loai_sach);
             img_update_sach = itemView.findViewById(R.id.img_edit_sach);
             img_delete_sach = itemView.findViewById(R.id.img_delete_sach);

@@ -71,7 +71,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
         holder.txt_item_ten_sach.setText("Tên sách: " + tenSach);
 
 
-        if (phieuMuon.getTrangThai() == 0) {
+        if (phieuMuon.getTraSach() == 0) {
             holder.txt_trang_thai_phieu_muon.setText("Chưa trả sách");
             holder.txt_trang_thai_phieu_muon.setTextColor(context.getResources().getColor(R.color.red));
             holder.btn_tra_sach.setVisibility(View.VISIBLE);
@@ -92,7 +92,7 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                     phieuMuonList = phieuMuonDAO.getAllPhieuMuon();
                     notifyDataSetChanged();
                 } else {
-                    Toast.makeText(context, "Tra sach that bai", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Trả sách thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
         });

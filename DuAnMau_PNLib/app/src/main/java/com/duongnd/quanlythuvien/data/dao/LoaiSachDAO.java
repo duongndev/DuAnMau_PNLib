@@ -24,7 +24,6 @@ public class LoaiSachDAO {
     public int themLoaiSach(LoaiSach loaiSach) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("tenLoai", loaiSach.getTenLoai());
-        contentValues.put("moTa", loaiSach.getMoTa());
         long result = sqLiteDatabase.insert("LoaiSach", null, contentValues);
         if (result != 0) {
             return -1;
@@ -36,7 +35,6 @@ public class LoaiSachDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put("maLoai", loaiSach.getMaLoai());
         contentValues.put("tenLoai", loaiSach.getTenLoai());
-        contentValues.put("moTa", loaiSach.getMoTa());
         return sqLiteDatabase.update("LoaiSach", contentValues, "maLoai = ?", new String[]{String.valueOf(loaiSach.getMaLoai())});
     }
 
@@ -75,7 +73,6 @@ public class LoaiSachDAO {
             LoaiSach loaiSach = new LoaiSach();
             loaiSach.setMaLoai(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maLoai"))));
             loaiSach.setTenLoai(cursor.getString(cursor.getColumnIndex("tenLoai")));
-            loaiSach.setMoTa(cursor.getString(cursor.getColumnIndex("moTa")));
             loaiSaches.add(loaiSach);
         }
 

@@ -17,15 +17,17 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.duongnd.quanlythuvien.R;
 import com.duongnd.quanlythuvien.data.dao.NhanVienDAO;
+import com.duongnd.quanlythuvien.data.dao.ThuThuDAO;
 import com.duongnd.quanlythuvien.data.model.NhanVien;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etUsername, etPassword;
-    private CheckBox cbRememberMe;
-    private SharedPreferences sharedPreferences;
-    private Button btnLogin;
+    EditText etUsername, etPassword;
+    CheckBox cbRememberMe;
+    SharedPreferences sharedPreferences;
+    Button btnLogin;
     NhanVienDAO nhanVienDAO;
+    ThuThuDAO thuThuDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-
         nhanVienDAO = new NhanVienDAO(this);
+        thuThuDAO = new ThuThuDAO(this);
 
         etPassword = findViewById(R.id.etPassword);
         etUsername = findViewById(R.id.etUsername);
@@ -50,24 +52,28 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> {
             String username = etUsername.getText().toString();
             String password = etPassword.getText().toString();
-            if (validateLogin(username, password)) {
-                Toast.makeText(this, "Login thanh cong", Toast.LENGTH_SHORT).show();
-                NhanVien nhanVien = nhanVienDAO.layNhanVienTheoTenDangNhap(username);
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("hoTen", nhanVien.getHoTen());
-                intent.putExtra("role", nhanVien.getRole());
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Login that bai", Toast.LENGTH_SHORT).show();
-            }
 
         });
 
     }
 
+    public void getLogin(String username, String password){
+        if (username.isEmpty() || password.isEmpty()){
+            Toast.makeText(this, "Vui lòng nhập tên đăng nhập và mật khẩu", Toast.LENGTH_SHORT).show();
+        } else {
+            if (validateLogin(username, password)){
+                Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Tên đăng nhập và mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     private boolean validateLogin(String username, String password){
-        return nhanVienDAO.checkDangNhap(username, password);
+        return thuThuDAO.checkLogin(username, password);
     }
 
 
