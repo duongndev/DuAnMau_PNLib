@@ -1,11 +1,12 @@
 package com.duongnd.quanlythuvien.data.model;
 
-public class NhanVien {
-    private int maNV;
-    private String hoTen;
-    private String tenDangNhap;
-    private int role;
-    private String matKhau;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class NhanVien implements Serializable {
+    private int maNV, role;
+    private String hoTen, tenDangNhap, matKhau;
 
     public NhanVien() {
     }

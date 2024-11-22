@@ -45,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Loai sach"
+            android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -52,6 +53,7 @@
             android:id="@+id/spin_loai_sach_layout_them_sach"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="10dp" />
     </LinearLayout>
 

@@ -17,6 +17,7 @@ import com.duongnd.quanlythuvien.data.dao.SachDAO;
 import com.duongnd.quanlythuvien.data.dao.ThanhVienDAO;
 import com.duongnd.quanlythuvien.data.model.PhieuMuon;
 import com.duongnd.quanlythuvien.data.model.Sach;
+import com.duongnd.quanlythuvien.utils.PhieuMuonInterface;
 
 import java.util.List;
 
@@ -27,6 +28,11 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
     PhieuMuonDAO phieuMuonDAO;
     SachDAO sachDAO;
     ThanhVienDAO thanhVienDAO;
+    PhieuMuonInterface phieuMuonInterface;
+
+  public void setClickPhieuMuonInterface(PhieuMuonInterface phieuMuonInterface) {
+        this.phieuMuonInterface = phieuMuonInterface;
+    }
 
     public PhieuMuonAdapter(Context context, List<PhieuMuon> phieuMuonList, PhieuMuonDAO phieuMuonDAO) {
         this.context = context;
@@ -89,11 +95,20 @@ public class PhieuMuonAdapter extends RecyclerView.Adapter<PhieuMuonAdapter.Phie
                boolean checkTraSach = phieuMuonDAO.thayDoiTrangThai(phieuMuonList.get(holder.getAdapterPosition()).getMaPM());
                 if (checkTraSach) {
                     phieuMuonList.clear();
-                    phieuMuonList = phieuMuonDAO.getAllPhieuMuon();
+                    phieuMuonList = phieuMuonDAO.layTatCaPhieuMuon();
                     notifyDataSetChanged();
                 } else {
                     Toast.makeText(context, "Trả sách thất bại", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(context, "Mã phiếu mượn: " + phieuMuonList.get(holder.getAdapterPosition()).getMaPM() + "", Toast.LENGTH_SHORT).show();
+                phieuMuonInterface.clickPhieuMuon(v, phieuMuonList.get(holder.getAdapterPosition()));
             }
         });
 

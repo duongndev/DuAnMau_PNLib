@@ -32,8 +32,8 @@ public class ThuThuDAO {
         return (row > 0);
     }
 
-    public boolean checkLogin(String hoTen,String MatKhau){
-        Cursor cursor = sqLiteDatabase.rawQuery("select * from ThuThu where hoTen = ? and matKhau = ?",new String[]{hoTen, MatKhau});
+    public boolean checkLogin(String maTT,String matKhau){
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from ThuThu where maTT = ? and matKhau = ?",new String[]{maTT, matKhau});
         if(cursor.getCount() != 0){
             return true;
         }else{
@@ -43,11 +43,11 @@ public class ThuThuDAO {
 
 
     public boolean capNhatMatKhau(int maTT, String oldPass, String newPass){
-        Cursor cursor = sqLiteDatabase.rawQuery("select * from ThuThu where MaTT = ? and matKhau = ?", new String[]{String.valueOf(maTT),oldPass});
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from ThuThu where maTT = ? and matKhau = ?", new String[]{String.valueOf(maTT),oldPass});
         if (cursor.getCount() > 0){
             ContentValues values = new ContentValues();
-            values.put("MatKhau", newPass);
-            long check = sqLiteDatabase.update("ThuThu",values,"MaTT = ?",new String[]{String.valueOf(maTT)});
+            values.put("matKhau", newPass);
+            long check = sqLiteDatabase.update("ThuThu",values,"maTT = ?",new String[]{String.valueOf(maTT)});
             return check != -1;
         }
         return false;

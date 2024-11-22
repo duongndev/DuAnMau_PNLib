@@ -84,12 +84,14 @@ public class NhanVienDAO {
         return sqLiteDatabase.update("NhanVien", values, "maNV = ?", new String[]{String.valueOf(maNV)});
     }
 
-    public boolean checkDangNhap(String tenDangNhap, String matKhau) {
+    public NhanVien checkDangNhap(String tenDangNhap, String matKhau) {
         String sql = "SELECT * FROM NhanVien WHERE tenDangNhap = ? AND matKhau = ?";
         List<NhanVien> nhanViens = getData(sql, tenDangNhap, matKhau);
-        return !nhanViens.isEmpty();
+        if (!nhanViens.isEmpty()) {
+            return nhanViens.get(0);
+        }
+        return null;
     }
-
 
 
 }

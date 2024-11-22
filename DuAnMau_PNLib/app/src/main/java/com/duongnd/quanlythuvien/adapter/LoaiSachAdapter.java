@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.duongnd.quanlythuvien.R;
 import com.duongnd.quanlythuvien.data.dao.LoaiSachDAO;
 import com.duongnd.quanlythuvien.data.model.LoaiSach;
+import com.duongnd.quanlythuvien.utils.LoaiSachInterface;
 
 import java.util.List;
 
@@ -27,6 +28,11 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.LoaiSa
     Context context;
     List<LoaiSach> listLoaiSach;
     LoaiSachDAO loaiSachDAO;
+    LoaiSachInterface loaiSachInterface;
+
+    public void setClickLoaiSachInterface(LoaiSachInterface loaiSachInterface) {
+        this.loaiSachInterface = loaiSachInterface;
+    }
 
 
     public LoaiSachAdapter(Context context, List<LoaiSach> listLoaiSach, LoaiSachDAO loaiSachDAO) {
@@ -98,6 +104,8 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.LoaiSa
             }
         });
 
+
+
     }
 
     @Override
@@ -110,7 +118,7 @@ public class LoaiSachAdapter extends RecyclerView.Adapter<LoaiSachAdapter.LoaiSa
 
     private void showDialogLoaiSach(LoaiSach loaiSach) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.layout_loai_sach, null);
+        View view = inflater.inflate(R.layout.layout_dialog_loai_sach, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(view);
         TextView tv_title_dialog_loai_sach = (TextView) view.findViewById(R.id.tv_title_dialog_loai_sach);

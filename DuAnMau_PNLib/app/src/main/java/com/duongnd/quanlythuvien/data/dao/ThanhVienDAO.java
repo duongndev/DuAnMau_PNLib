@@ -67,7 +67,7 @@ public class ThanhVienDAO {
             ThanhVien thanhVien = new ThanhVien();
             thanhVien.setMaTV(Integer.parseInt(cursor.getString(cursor.getColumnIndex("maTV"))));
             thanhVien.setHoTen(cursor.getString(cursor.getColumnIndex("hoTen")));
-            thanhVien.setNamSinh(cursor.getString(cursor.getColumnIndex("namSinh")));
+            thanhVien.setNamSinh(Integer.parseInt(cursor.getString(cursor.getColumnIndex("namSinh"))));
             thanhVienList.add(thanhVien);
             cursor.moveToNext();
         }

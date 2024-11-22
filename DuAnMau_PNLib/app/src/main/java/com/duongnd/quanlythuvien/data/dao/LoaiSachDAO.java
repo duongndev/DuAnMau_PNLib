@@ -21,14 +21,10 @@ public class LoaiSachDAO {
         sqLiteDatabase = database.getWritableDatabase();
     }
 
-    public int themLoaiSach(LoaiSach loaiSach) {
+    public long themLoaiSach(LoaiSach loaiSach) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("tenLoai", loaiSach.getTenLoai());
-        long result = sqLiteDatabase.insert("LoaiSach", null, contentValues);
-        if (result != 0) {
-            return -1;
-        }
-        return 1;
+        return sqLiteDatabase.insert("LoaiSach", null, contentValues);
     }
 
     public int suaLoaiSach(LoaiSach loaiSach) {

@@ -7,6 +7,9 @@
     <string name="title_login">Phương Nam Lib</string>
     <string name="username">Tên đăng nhập </string>
     <string name="password">Mật khẩu</string>
+    <string name="confirm_password"> Nhập lại mật khẩu</string>
+    <string name="current_password">Mật khẩu hiện tại</string>
+    <string name="new_password">Mật khẩu mới</string>
     <string name="remember_password">Lưu mật khẩu</string>
     <string name="forgot_password">Quên mật khẩu?</string>
     <string name="logo_desc">App Logo</string>

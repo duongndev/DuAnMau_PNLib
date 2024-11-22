@@ -3,15 +3,16 @@ package com.duongnd.quanlythuvien.data.model;
 import java.util.Date;
 
 public class PhieuMuon {
-    private int maPM, maTT, maTV, maSach, tienThue, traSach;
+    private int maPM, maNV, maTV, maSach, tienThue, traSach;
     private String ngayMuon, ngayTra;
 
     public PhieuMuon() {
     }
 
-    public PhieuMuon(int maPM, int maTT, int maTV, int maSach, int tienThue, int traSach, String ngayMuon, String ngayTra) {
+
+    public PhieuMuon(int maPM, int maNV, int maTV, int maSach, int tienThue, int traSach, String ngayMuon, String ngayTra) {
         this.maPM = maPM;
-        this.maTT = maTT;
+        this.maNV = maNV;
         this.maTV = maTV;
         this.maSach = maSach;
         this.tienThue = tienThue;
@@ -28,12 +29,12 @@ public class PhieuMuon {
         this.maPM = maPM;
     }
 
-    public int getMaTT() {
-        return maTT;
+    public int getMaNV() {
+        return maNV;
     }
 
-    public void setMaTT(int maTT) {
-        this.maTT = maTT;
+    public void setMaNV(int maNV) {
+        this.maNV = maNV;
     }
 
     public int getMaTV() {
@@ -82,19 +83,5 @@ public class PhieuMuon {
 
     public void setNgayTra(String ngayTra) {
         this.ngayTra = ngayTra;
-    }
-
-    @Override
-    public String toString() {
-        return "PhieuMuon{" +
-                "maPM=" + maPM +
-                ", maTT=" + maTT +
-                ", maTV=" + maTV +
-                ", maSach=" + maSach +
-                ", tienThue=" + tienThue +
-                ", traSach=" + traSach +
-                ", ngayMuon='" + ngayMuon + '\'' +
-                ", ngayTra='" + ngayTra + '\'' +
-                '}';
     }
 }

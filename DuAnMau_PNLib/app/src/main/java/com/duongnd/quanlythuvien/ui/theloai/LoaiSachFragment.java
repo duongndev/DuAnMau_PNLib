@@ -72,7 +72,7 @@ public class LoaiSachFragment extends Fragment {
 
     private void dialogThemLoaiSach(View view) {
         LayoutInflater inflater = LayoutInflater.from(requireContext());
-        view = inflater.inflate(R.layout.layout_loai_sach, null);
+        view = inflater.inflate(R.layout.layout_dialog_loai_sach, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(view);
         TextView tv_title_dialog_loai_sach = view.findViewById(R.id.tv_title_dialog_loai_sach);
@@ -88,8 +88,13 @@ public class LoaiSachFragment extends Fragment {
                 } else {
                     LoaiSach loaiSach = new LoaiSach();
                     loaiSach.setTenLoai(tenLoai);
-                    loaiSachDAO.themLoaiSach(loaiSach);
-                    getAllLoaiSach();
+                    long result = loaiSachDAO.themLoaiSach(loaiSach);
+                    if (result > 0) {
+                        Toast.makeText(getContext(), "Them thanh cong", Toast.LENGTH_SHORT).show();
+                        getAllLoaiSach();
+                    } else {
+                        Toast.makeText(getContext(), "Them that bai", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
@@ -108,5 +113,6 @@ public class LoaiSachFragment extends Fragment {
         loaiSachList = loaiSachDAO.layTatCaLoaiSach();
         loaiSachAdapter = new LoaiSachAdapter(requireContext(), loaiSachList, loaiSachDAO);
         recyclerView_loai_sach.setAdapter(loaiSachAdapter);
+        loaiSachAdapter.notifyDataSetChanged();
     }
 }

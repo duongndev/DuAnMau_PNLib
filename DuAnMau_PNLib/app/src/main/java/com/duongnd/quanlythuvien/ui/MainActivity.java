@@ -18,9 +18,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.duongnd.quanlythuvien.R;
+import com.duongnd.quanlythuvien.data.model.NhanVien;
+import com.duongnd.quanlythuvien.ui.doiMK.DoiPassFragment;
+import com.duongnd.quanlythuvien.ui.nhanvien.NhanVienFragment;
 import com.duongnd.quanlythuvien.ui.phieumuon.PhieuMuonFragment;
 import com.duongnd.quanlythuvien.ui.sach.SachFragment;
+import com.duongnd.quanlythuvien.ui.thanhvien.ThanhVienFragment;
 import com.duongnd.quanlythuvien.ui.theloai.LoaiSachFragment;
+import com.duongnd.quanlythuvien.ui.thongke.DoanhThuFragment;
+import com.duongnd.quanlythuvien.ui.thongke.Top10Fragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,21 +35,23 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     int role;
+    String hoTen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-//        role = getIntent().getIntExtra("role", 1);
+        NhanVien nhanVien = (NhanVien) getIntent().getSerializableExtra("nhanVien");
+        role = nhanVien.getRole();
+        hoTen = nhanVien.getHoTen();
 
 
         initViews();
         if (savedInstanceState == null) {
-            replaceFragment(new LoaiSachFragment());
+            replaceFragment(new PhieuMuonFragment());
         }
-
-
+        
         setupNavigationDrawer();
 
     }
@@ -52,12 +60,12 @@ public class MainActivity extends AppCompatActivity {
         View headerView = navigationView.getHeaderView(0);
         TextView tvUserName = headerView.findViewById(R.id.tv_user);
         TextView tvRole = headerView.findViewById(R.id.tv_role);
-        tvUserName.setText(getIntent().getStringExtra("hoTen"));
+        tvUserName.setText(hoTen);
         Menu menu = navigationView.getMenu();
         MenuItem taoNhanVien = menu.findItem(R.id.nav_tao_nhan_vien);
 
-//        taoNhanVien.setVisible(role == 1);
-//        tvRole.setText("Chuc vu: " + (role == 1 ? "Thu Thu" : "Nhan Vien"));
+        taoNhanVien.setVisible(role == 1);
+        tvRole.setText("Chức vụ: " + (role == 1 ? "Thủ thư" : "Nhân viên"));
 
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -66,17 +74,17 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.nav_quan_ly_the_loai) {
                 replaceFragment(new LoaiSachFragment());
             } else if (id == R.id.nav_quan_ly_thanh_vien) {
-                Toast.makeText(MainActivity.this, "Quan Ly Thanh Vien", Toast.LENGTH_SHORT).show();
+                replaceFragment(new ThanhVienFragment());
             } else if (id == R.id.nav_quan_ly_phieu_muon) {
                 replaceFragment(new PhieuMuonFragment());
             } else if (id == R.id.nav_tao_nhan_vien) {
-                Toast.makeText(MainActivity.this, "Tao Nhan Vien", Toast.LENGTH_SHORT).show();
+                replaceFragment(new NhanVienFragment());
             } else if (id == R.id.nav_doi_mat_khau) {
-                Toast.makeText(this, "Đổi mật khẩu", Toast.LENGTH_SHORT).show();
+                replaceFragment(new DoiPassFragment());
             } else if (id == R.id.nav_doanh_thu) {
-                Toast.makeText(this, "Doanh Thu", Toast.LENGTH_SHORT).show();
+                replaceFragment(new DoanhThuFragment());
             } else if (id == R.id.nav_top10) {
-                Toast.makeText(this, "Top 10 sách", Toast.LENGTH_SHORT).show();
+                replaceFragment(new Top10Fragment());
             }
             setTitle(item.getTitle());
             drawerLayout.closeDrawer(GravityCompat.START);

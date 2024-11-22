@@ -1,94 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:orientation="horizontal"
-    android:layout_margin="5dp">
-
-
-    <LinearLayout
-        android:id="@+id/layout_iem_sach"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/txt_ma_sach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ma sach"
-            android:textColor="@color/black"/>
-        <TextView
-            android:id="@+id/txt_ten_sach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ten sach"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/txt_ten_loai_sach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="loai sach"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/txt_gia_sach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="gia sach"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/txt_nam_xuat_ban"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nam xuat ban"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            tools:ignore="MissingConstraints" />
-
-
-    </LinearLayout>
-
+    app:cardCornerRadius="16dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/img_edit_sach"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="10dp"
-            android:src="@android:drawable/ic_menu_edit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_delete_loai_sach" />
-        <ImageView
-            android:id="@+id/img_delete_sach"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_delete" />
+        <LinearLayout
+            android:id="@+id/layout_iem_sach"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/txt_ma_sach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ma sach"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/txt_ten_sach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Ten sach"
+                android:textColor="@color/black"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/txt_ten_loai_sach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="loai sach"
+                android:textColor="@color/black"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/txt_gia_sach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="gia sach"
+                android:textColor="@color/black"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/txt_nam_xuat_ban"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Nam xuat ban"
+                android:textColor="@color/black"
+                tools:ignore="MissingConstraints" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_edit_sach"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="10dp"
+                android:src="@android:drawable/ic_menu_edit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_delete_loai_sach" />
+
+            <ImageView
+                android:id="@+id/img_delete_sach"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_delete" />
+        </LinearLayout>
     </LinearLayout>
 
 
-
-
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>
