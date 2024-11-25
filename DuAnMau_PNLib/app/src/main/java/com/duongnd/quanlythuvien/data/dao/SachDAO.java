@@ -31,7 +31,7 @@ public class SachDAO {
     }
 
 
-    public int suaSach(Sach sach) {
+    public long suaSach(Sach sach) {
         ContentValues values = new ContentValues();
         values.put("tenSach", sach.getTenSach());
         values.put("maLoai", sach.getMaLoai());

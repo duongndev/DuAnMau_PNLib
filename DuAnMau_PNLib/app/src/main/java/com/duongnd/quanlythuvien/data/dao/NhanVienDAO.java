@@ -21,13 +21,13 @@ public class NhanVienDAO {
         sqLiteDatabase = database.getWritableDatabase();
     }
 
-    public void themNhanVien(NhanVien nhanVien) {
+    public long themNhanVien(NhanVien nhanVien) {
         ContentValues values = new ContentValues();
         values.put("hoTen", nhanVien.getHoTen());
         values.put("tenDangNhap", nhanVien.getTenDangNhap());
         values.put("role", nhanVien.getRole());
         values.put("matKhau", nhanVien.getMatKhau());
-        sqLiteDatabase.insert("NhanVien", null, values);
+        return sqLiteDatabase.insert("NhanVien", null, values);
     }
 
     public int suaNhanVien(NhanVien nhanVien) {
@@ -43,7 +43,7 @@ public class NhanVienDAO {
         return sqLiteDatabase.delete("NhanVien", "maNV = ?", new String[]{String.valueOf(maNV)});
     }
 
-    public List<NhanVien> layTatCaNhanVien() {
+    public List<NhanVien> getAllNhanVien() {
         String sql = "SELECT * FROM NhanVien";
         return getData(sql);
     }
@@ -76,6 +76,13 @@ public class NhanVienDAO {
         String sql = "SELECT * FROM NhanVien WHERE tenDangNhap = ?";
         List<NhanVien> nhanViens = getData(sql, tenDangNhap);
         return nhanViens.get(0);
+    }
+
+    // kiem tra ten dang nhap
+    public boolean kiemTraTenDangNhap(String tenDangNhap) {
+        String sql = "SELECT * FROM NhanVien WHERE tenDangNhap = ?";
+        List<NhanVien> nhanViens = getData(sql, tenDangNhap);
+        return nhanViens.isEmpty();
     }
 
     public int doiMatKhauNhanVien(int maNV, String matKhauMoi) {

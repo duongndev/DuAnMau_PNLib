@@ -34,11 +34,7 @@ public class ThuThuDAO {
 
     public boolean checkLogin(String maTT,String matKhau){
         Cursor cursor = sqLiteDatabase.rawQuery("select * from ThuThu where maTT = ? and matKhau = ?",new String[]{maTT, matKhau});
-        if(cursor.getCount() != 0){
-            return true;
-        }else{
-            return false;
-        }
+        return cursor.getCount() != 0;
     }
 
 

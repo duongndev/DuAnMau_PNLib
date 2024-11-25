@@ -79,7 +79,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
         holder.img_update_sach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogSach(sachs);
+                showDialogSach(v, sachs);
             }
         });
 
@@ -113,9 +113,9 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
 
     }
 
-    private void showDialogSach(Sach sach){
+    private void showDialogSach(View view, Sach sach){
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.layout_dialog_sach, null);
+        view = inflater.inflate(R.layout.layout_dialog_sach, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         TextView txt_title = (TextView) view.findViewById(R.id.txt_title_layout_them_sach);
         EditText edt_ten_sach = (EditText) view.findViewById(R.id.edt_ten_sach_layout_them_sach);
@@ -152,7 +152,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
         txt_title.setText("Sửa sách");
         edt_ten_sach.setText(sach.getTenSach());
         edt_gia_sach.setText(Integer.toString(sach.getGiaThue()));
-        edt_nam_xuat_ban.setText(sach.getNamXuatBan());
+        edt_nam_xuat_ban.setText(Integer.toString(sach.getNamXuatBan()));
         builder.setView(view);
 
 
@@ -164,12 +164,17 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.SachViewHolder
                 sach.setNamXuatBan(Integer.parseInt(edt_nam_xuat_ban.getText().toString()));
                 sach.setMaLoai(ms);
                 sachDAO = new SachDAO(context);
-                sachDAO.suaSach(sach);
-                listSach.clear();
-                listSach.addAll(sachDAO.getAllSach());
-                notifyDataSetChanged();
-                dialog.dismiss();
-                Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                long result = sachDAO.suaSach(sach);
+                if (result > 0) {
+                    listSach.clear();
+                    listSach.addAll(sachDAO.getAllSach());
+                    notifyDataSetChanged();
+                    dialog.dismiss();
+                    Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Sửa không thông", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
             }
         });
 

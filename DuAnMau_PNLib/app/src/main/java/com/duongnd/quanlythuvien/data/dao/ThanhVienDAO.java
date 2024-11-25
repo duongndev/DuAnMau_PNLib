@@ -20,16 +20,11 @@ public class ThanhVienDAO {
         sqLiteDatabase = database.getWritableDatabase();
     }
 
-    public int themThanhVien(ThanhVien thanhVien) {
+    public long themThanhVien(ThanhVien thanhVien) {
         ContentValues values = new ContentValues();
         values.put("hoTen", thanhVien.getHoTen());
         values.put("namSinh", thanhVien.getNamSinh());
-        long result = sqLiteDatabase.insert("ThanhVien", null, values);
-        if (result != 0) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return sqLiteDatabase.insert("ThanhVien", null, values);
     }
 
 

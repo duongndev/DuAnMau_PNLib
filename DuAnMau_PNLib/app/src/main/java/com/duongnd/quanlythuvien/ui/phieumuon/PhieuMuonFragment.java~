@@ -71,7 +71,7 @@ public class PhieuMuonFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_phieu_muon, container, false);
         recyclerView_phieu_muon = view.findViewById(R.id.recyclerView_phieu_muon);
-        btn_them_phieu_muon = view.findViewById(R.id.btn_them_phieu_muon);
+        btn_them_phieu_muon = view.findViewById(R.id.them_phieu_muon);
 
         phieuMuonList = new ArrayList<>();
         phieuMuonDAO = new PhieuMuonDAO(requireContext());

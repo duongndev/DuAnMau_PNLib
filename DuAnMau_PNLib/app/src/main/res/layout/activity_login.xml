@@ -22,9 +22,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/loginLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:src="@drawable/book"/>
         <TextView
             android:id="@+id/loginTitle"
@@ -32,10 +32,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/title_login"
-            android:textColor="@color/text_primary"
+            android:textColor="@color/black"
             android:textSize="24sp" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayout_username_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -91,7 +92,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:clickable="true"
                 android:text="@string/forgot_password"
                 android:textColor="@color/link_color" />
 
@@ -111,7 +111,7 @@
                 android:backgroundTint="#FFC107"
                 android:layout_weight="1"
                 android:text="Đăng Nhập"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:layout_marginEnd="5dp"
                 android:textStyle="bold" />
 
@@ -123,7 +123,7 @@
                 android:text="Hủy"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

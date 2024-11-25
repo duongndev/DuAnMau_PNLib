@@ -79,19 +79,8 @@ public class ThanhVienFragment extends Fragment {
                 if (tenThanhVien.isEmpty() || namSinh.isEmpty()) {
                     Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
-                    ThanhVien thanhVien = new ThanhVien();
-                    thanhVien.setHoTen(tenThanhVien);
-                    thanhVien.setNamSinh(Integer.parseInt(namSinh));
-                    long result = thanhVienDAO.themThanhVien(thanhVien);
-                    if (result > 0) {
-                        Toast.makeText(getContext(), "Thêm thành viên thành công", Toast.LENGTH_SHORT).show();
-                        loadData();
-                        dialog.dismiss();
-                    } else {
-                        Toast.makeText(getContext(), "Thêm thành viên thất bại", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-
+                    themThanhVien(tenThanhVien, Integer.parseInt(namSinh));
+                    dialog.dismiss();
                 }
             }
         });
@@ -101,6 +90,20 @@ public class ThanhVienFragment extends Fragment {
                 dialog.dismiss();
             }
         });
+
+    }
+
+    private void themThanhVien(String hoTen, int namSinh){
+        ThanhVien thanhVien = new ThanhVien();
+        thanhVien.setHoTen(hoTen);
+        thanhVien.setNamSinh(namSinh);
+       long result = thanhVienDAO.themThanhVien(thanhVien);
+        if (result > 0){
+            Toast.makeText(getContext(), "Thêm thanh viên thành công", Toast.LENGTH_SHORT).show();
+            loadData();
+        } else {
+            Toast.makeText(getContext(), "Them thanh vien that bai", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

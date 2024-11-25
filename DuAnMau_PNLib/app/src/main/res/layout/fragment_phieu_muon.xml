@@ -17,7 +17,7 @@
         tools:listitem="@layout/item_layout_phieu_muon"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/them_phieu_muon"
+        android:id="@+id/btn_them_phieu_muon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

@@ -4,20 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.phieumuon.PhieuMuonFragment">
+    tools:context=".ui.theloai.TheLoaiFragment">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view_loai_sach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_alignParentTop="true"
+        app:iconifiedByDefault="false"
+        android:visibility="gone"
+        app:queryHint="Nhập tên loại sách"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_sach"
+        android:id="@+id/recyclerView_loai_sach"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/search_view_loai_sach"
         android:layout_marginTop="5dp"
         android:padding="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
-        tools:listitem="@layout/item_layout_phieu_muon"/>
+        tools:listitem="@layout/item_loai_sach"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/them_sach"
+        android:id="@+id/add_loai_sach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

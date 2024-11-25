@@ -34,7 +34,7 @@ public class PhieuMuonDAO {
     }
 
 
-    public int suaPhieuMuon(PhieuMuon phieuMuon) {
+    public long suaPhieuMuon(PhieuMuon phieuMuon) {
         ContentValues values = new ContentValues();
         values.put("maNV", phieuMuon.getMaNV());
         values.put("maTV", phieuMuon.getMaTV());
@@ -43,12 +43,7 @@ public class PhieuMuonDAO {
         values.put("ngayMuon", phieuMuon.getNgayMuon());
         values.put("ngayTra", phieuMuon.getNgayTra());
         values.put("traSach", phieuMuon.getTraSach());
-        long result = sqLiteDatabase.update("PhieuMuon", values, "maPM=?", new String[]{String.valueOf(phieuMuon.getMaPM())});
-        if (result != 0) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return sqLiteDatabase.update("PhieuMuon", values, "maPM=?", new String[]{String.valueOf(phieuMuon.getMaPM())});
     }
 
     public int xoaPhieuMuon(int maPM) {

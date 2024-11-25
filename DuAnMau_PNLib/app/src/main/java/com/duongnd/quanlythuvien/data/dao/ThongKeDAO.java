@@ -30,7 +30,7 @@ public class ThongKeDAO {
         return 0;
     }
 
-    public ArrayList<Sach> getTop10Sasch(){
+    public ArrayList<Sach> getTop10Sach(){
         ArrayList<Sach> sachArrayList = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT pm.maSach, sc.TenSach, COUNT(pm.maSach) AS SoLanMuon FROM PhieuMuon pm, Sach sc WHERE pm.maSach = sc.maSach GROUP by pm.maSach, sc.tenSach ORDER by COUNT(pm.maSach) DESC LIMIT 10",null);
         while (cursor.moveToNext()){
